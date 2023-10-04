@@ -1,17 +1,22 @@
 import { Car } from "../dto/CarDTO";
 import { CarService } from "./CarService";
+import { CarRepositoryImpl } from "@/features/data/CarRepositoryImpl";
 
 export class CarServiceImpl implements CarService {
-  getCarID(carname: String): number {
-    throw new Error("Method not implemented.");
+  CarRepo = new CarRepositoryImpl();
+  getCarName(car: Car): String {
+    return this.CarRepo.getCarName(car);
   }
-  deleteCarByID(ID: number): boolean {
-    throw new Error("Method not implemented.");
+  deleteCar(car: Car): boolean {
+    return this.CarRepo.deleteCar(car);
   }
-  getCarByID(ID: number): Promise<Car> {
-    throw new Error("Method not implemented.");
+  getCarByName(name: String): Promise<Car | null> {
+    return Promise.resolve(this.CarRepo.getCarByName(name));
   }
-  editCarByID(ID: number, placeholder: String): boolean {
+  addCarIntoDatabase(car: Car): boolean {
+    return this.CarRepo.addCarIntoDatabase(car);
+  }
+  editCar(name: String, placeholder: String): boolean {
     throw new Error("Method not implemented.");
   }
 }

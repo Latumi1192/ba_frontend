@@ -1,9 +1,10 @@
 import { Car } from "../domain/dto/CarDTO";
 
 export interface CarRepository {
-  getCarID(carname: String): number;
-  deleteCarByID(ID: number): boolean;
-  getCarByID(ID: number): Promise<Car>;
+  getCarName(car: Car): String;
+  deleteCar(car: Car): boolean;
+  getCarByName(name: String): Promise<Car | null>;
+  addCarIntoDatabase(car: Car): boolean;
   //placeholder
-  editCarByID(ID: number, placeholder: String): boolean;
+  editCar(name: String, placeholder: String): boolean;
 }

@@ -5,4 +5,5 @@ export type Car = {
   leasingrate: number;
   availability: boolean;
   ID: number;
+  count: number;
 };

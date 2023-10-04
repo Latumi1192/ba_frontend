@@ -1,22 +1,39 @@
 import { Brand } from "../domain/dto/BrandDTO";
 import { Car } from "../domain/dto/CarDTO";
 import { BrandRepository } from "./BrandRepository";
+import { carList } from "../LocalDatabase";
 
-export class BrandRepositoryImpl implements BrandRepository{
-    getAllBrand(): Promise<Brand[]> {
-        throw new Error("Method not implemented.");
-    }
-    getAllCarFromBrand(brandname: String): Promise<Car[]> {
-        throw new Error("Method not implemented.");
-    }
-    deleteBrand(brandname: String): boolean {
-        throw new Error("Method not implemented.");
-    }
-    addCarIntoBrand(car: Car): boolean {
-        throw new Error("Method not implemented.");
-    }
-    editCar(placeholder: String): boolean {
-        throw new Error("Method not implemented.");
-    }
+export class BrandRepositoryImpl implements BrandRepository {
+  tmpCarList = carList; //will be replaced by API call later
 
+  getAllBrand(): String[] {
+    var brandList: String[] = [];
+    for (let i = 0; i < carList.length; i++) {
+      if (brandList.indexOf(carList[i].brand) === -1)
+        brandList.push(carList[i].brand);
+    }
+    return brandList;
+  }
+
+  getAllCarFromBrand(brandname: String): Car[] {
+    var tmpCarArray: Car[] = [];
+    for (let i = 0; i < carList.length; i++) {
+      if (carList[i].brand === brandname) {
+        tmpCarArray.push(carList[i]);
+      }
+    }
+    return tmpCarArray;
+  }
+
+  deleteBrand(brandname: String): void {
+    for (let i = 0; i < carList.length; i++) {
+      if (carList[i].brand === brandname) {
+        carList.splice(i, 1);
+      }
+    }
+  }
+
+  editCar(placeholder: String): boolean {
+    throw new Error("Method not implemented.");
+  }
 }

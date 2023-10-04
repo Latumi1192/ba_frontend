@@ -3,8 +3,15 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { Box } from "@mui/material";
+import { CarServiceImpl } from "@/features/domain/services/CarServiceImpl";
+import { BrandServiceImpl } from "@/features/domain/services/BrandServiceImpl";
+import { Car } from "@/features/domain/dto/CarDTO";
 
 export default function BasicMenu() {
+  const CarServ = new CarServiceImpl();
+  const BrandServ = new BrandServiceImpl();
+  const brandArray = BrandServ.getAllBrand();
+
   const [anchorEl1, setAnchorEl1] = React.useState<null | HTMLElement>(null);
   const [anchorEl2, setAnchorEl2] = React.useState<null | HTMLElement>(null);
 
@@ -16,13 +23,16 @@ export default function BasicMenu() {
   const handleClick2 = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl2(event.currentTarget);
   };
-  const handleClose = () => {
+  const handleClose1 = () => {
     setAnchorEl1(null);
+    setCar("Select Car");
+  };
+  const handleClose2 = () => {
     setAnchorEl2(null);
   };
-
-  const [brand, setBrand] = React.useState("Select Brand");
-  const [car, setCar] = React.useState("Select Car");
+  const [brand, setBrand] = React.useState<String>("Select Brand");
+  const [car, setCar] = React.useState<String>("Select Car");
+  const [carArray, setCarArray] = React.useState<Car[]>([]);
 
   return (
     <Box>
@@ -40,35 +50,22 @@ export default function BasicMenu() {
         id="basic-menu"
         anchorEl={anchorEl1}
         open={open1}
-        onClose={handleClose}
+        onClose={handleClose1}
         MenuListProps={{
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem
-          onClick={() => {
-            setBrand("Audi");
-            handleClose();
-          }}
-        >
-          Audi
-        </MenuItem>
-        <MenuItem
-          onClick={() => {
-            setBrand("Tesla");
-            handleClose();
-          }}
-        >
-          Tesla
-        </MenuItem>
-        <MenuItem
-          onClick={() => {
-            setBrand("BMW");
-            handleClose();
-          }}
-        >
-          BMW
-        </MenuItem>
+        {brandArray.map((item) => (
+          <MenuItem
+            onClick={() => {
+              setBrand(item);
+              setCarArray(BrandServ.getAllCarFromBrand(item));
+              handleClose1();
+            }}
+          >
+            {item}
+          </MenuItem>
+        ))}
       </Menu>
 
       <Button
@@ -85,35 +82,21 @@ export default function BasicMenu() {
         id="basic-menu"
         anchorEl={anchorEl2}
         open={open2}
-        onClose={handleClose}
+        onClose={handleClose2}
         MenuListProps={{
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem
-          onClick={() => {
-            setCar("A8");
-            handleClose();
-          }}
-        >
-          A8
-        </MenuItem>
-        <MenuItem
-          onClick={() => {
-            setCar("Model S");
-            handleClose();
-          }}
-        >
-          Model S
-        </MenuItem>
-        <MenuItem
-          onClick={() => {
-            setCar("S500");
-            handleClose();
-          }}
-        >
-          S500
-        </MenuItem>
+        {carArray.map((item) => (
+          <MenuItem
+            onClick={() => {
+              setCar(item.carname);
+              handleClose2();
+            }}
+          >
+            {item.carname}
+          </MenuItem>
+        ))}
       </Menu>
     </Box>
   );

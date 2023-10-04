@@ -1,19 +1,18 @@
 import { Brand } from "../dto/BrandDTO";
 import { Car } from "../dto/CarDTO";
 import { BrandService } from "./BrandService";
+import { BrandRepositoryImpl } from "@/features/data/BrandRepositoryImpl";
 
 export class BrandServiceImpl implements BrandService {
-  getAllBrand(): Promise<Brand[]> {
-    throw new Error("Method not implemented.");
+  BrandRepo = new BrandRepositoryImpl();
+  getAllBrand(): String[] {
+    return this.BrandRepo.getAllBrand();
   }
-  getAllCarFromBrand(brandname: String): Promise<Car[]> {
-    throw new Error("Method not implemented.");
+  getAllCarFromBrand(brandname: String): Car[] {
+    return this.BrandRepo.getAllCarFromBrand(brandname);
   }
-  deleteBrand(brandname: String): boolean {
-    throw new Error("Method not implemented.");
-  }
-  addCarIntoBrand(car: Car): boolean {
-    throw new Error("Method not implemented.");
+  deleteBrand(brandname: String): void {
+    this.BrandRepo.deleteBrand(brandname);
   }
   editCar(placeholder: String): boolean {
     throw new Error("Method not implemented.");
