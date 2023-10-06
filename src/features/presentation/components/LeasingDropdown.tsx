@@ -6,6 +6,7 @@ import { Box, ToggleButton, ToggleButtonGroup } from "@mui/material";
 import { CarServiceImpl } from "@/features/domain/services/CarServiceImpl";
 import { BrandServiceImpl } from "@/features/domain/services/BrandServiceImpl";
 import { Car } from "@/features/domain/dto/CarDTO";
+import Rechnung from "./Rechnung";
 
 export default function BasicMenu() {
   const CarServ = new CarServiceImpl();
@@ -32,22 +33,26 @@ export default function BasicMenu() {
     setAnchorEl2(null);
   };
 
-  const [alignment, setAlignment] = React.useState<string | null>("left");
+  const [alignment, setAlignment] = React.useState<string | null>("0");
 
   const handleAlignment = (
     event: React.MouseEvent<HTMLElement>,
     newAlignment: string | null
   ) => {
-    setAlignment(newAlignment);
+    if (newAlignment !== null) {
+      setAlignment(newAlignment);
+    }
   };
 
-  const [alignment2, setAlignment2] = React.useState<string | null>("left");
+  const [alignment2, setAlignment2] = React.useState<string | null>("0");
 
   const handleAlignment2 = (
     event: React.MouseEvent<HTMLElement>,
     newAlignment: string | null
   ) => {
-    setAlignment2(newAlignment);
+    if (newAlignment !== null) {
+      setAlignment2(newAlignment);
+    }
   };
 
   const [brand, setBrand] = React.useState<String>("Select Brand");
@@ -152,25 +157,26 @@ export default function BasicMenu() {
               onChange={handleAlignment2}
               aria-label="text alignment"
             >
-              <ToggleButton value="12" aria-label="left aligned">
+              <ToggleButton value="10000" aria-label="left aligned">
                 10.000 km
               </ToggleButton>
-              <ToggleButton value="24" aria-label="centered">
+              <ToggleButton value="15000" aria-label="centered">
                 15.000 km
               </ToggleButton>
-              <ToggleButton value="36" aria-label="right aligned">
+              <ToggleButton value="20000" aria-label="right aligned">
                 20.000 km
               </ToggleButton>
-              <ToggleButton value="48" aria-label="justified">
+              <ToggleButton value="25000" aria-label="justified">
                 25.000 km
               </ToggleButton>
-              <ToggleButton value="60" aria-label="justified">
+              <ToggleButton value="30000" aria-label="justified">
                 30.000 km
               </ToggleButton>
             </ToggleButtonGroup>
           </Box>
         </div>
       )}
+      <Rechnung duration={alignment} route={alignment2} />
     </Box>
   );
 }
