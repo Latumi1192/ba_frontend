@@ -7,7 +7,7 @@ export const carList: Array<Car> = [
     price: 100000,
     leasingrate: 300,
     availability: true,
-    ID: 10001,
+    ID: "10001",
     count: 10,
   },
   {
@@ -16,7 +16,7 @@ export const carList: Array<Car> = [
     price: 44000,
     leasingrate: 140,
     availability: true,
-    ID: 10002,
+    ID: "10002",
     count: 10,
   },
   {
@@ -25,7 +25,7 @@ export const carList: Array<Car> = [
     price: 30000,
     leasingrate: 100,
     availability: true,
-    ID: 10003,
+    ID: "10003",
     count: 10,
   },
   {
@@ -34,7 +34,7 @@ export const carList: Array<Car> = [
     price: 95000,
     leasingrate: 290,
     availability: true,
-    ID: 20001,
+    ID: "20001",
     count: 10,
   },
   {
@@ -43,7 +43,7 @@ export const carList: Array<Car> = [
     price: 100000,
     leasingrate: 300,
     availability: true,
-    ID: 20002,
+    ID: "20002",
     count: 10,
   },
   {
@@ -52,7 +52,7 @@ export const carList: Array<Car> = [
     price: 45000,
     leasingrate: 255,
     availability: true,
-    ID: 20003,
+    ID: "20003",
     count: 10,
   },
   {
@@ -61,7 +61,7 @@ export const carList: Array<Car> = [
     price: 35000,
     leasingrate: 140,
     availability: true,
-    ID: 30001,
+    ID: "30001",
     count: 10,
   },
   {
@@ -70,7 +70,7 @@ export const carList: Array<Car> = [
     price: 55000,
     leasingrate: 155,
     availability: true,
-    ID: 30002,
+    ID: "30002",
     count: 10,
   },
   {
@@ -79,7 +79,7 @@ export const carList: Array<Car> = [
     price: 70000,
     leasingrate: 185,
     availability: true,
-    ID: 30003,
+    ID: "30003",
     count: 10,
   },
 ];
