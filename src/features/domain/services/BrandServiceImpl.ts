@@ -5,9 +5,16 @@ import { BrandRepositoryImpl } from "@/features/data/BrandRepositoryImpl";
 
 export class BrandServiceImpl implements BrandService {
   BrandRepo = new BrandRepositoryImpl();
-  getAllBrand(): String[] {
-    return this.BrandRepo.getAllBrand();
+  async getAllBrand(): Promise<String[]> {
+    try {
+      const data = await this.BrandRepo.getAllBrand();
+      return data;
+    } catch (error) {
+      console.error("An error occurred:", error);
+      return [];
+    }
   }
+
   getAllCarFromBrand(brandname: String): Car[] {
     return this.BrandRepo.getAllCarFromBrand(brandname);
   }
@@ -18,3 +25,5 @@ export class BrandServiceImpl implements BrandService {
     throw new Error("Method not implemented.");
   }
 }
+
+

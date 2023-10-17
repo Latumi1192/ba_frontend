@@ -2,7 +2,7 @@ import { Car } from "../dto/CarDTO";
 import { Brand } from "../dto/BrandDTO";
 
 export interface BrandService {
-  getAllBrand(): Array<String>;
+  getAllBrand(): Promise<String[]>;
   getAllCarFromBrand(brandname: String): Array<Car>;
   deleteBrand(brandname: String): void;
   //placeholder

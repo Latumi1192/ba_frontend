@@ -2,17 +2,36 @@ import { Brand } from "../domain/dto/BrandDTO";
 import { Car } from "../domain/dto/CarDTO";
 import { BrandRepository } from "./BrandRepository";
 import { carList } from "../LocalDatabase";
+import axios from "axios";
+
+const backendURL = "http://localhost:3000";
 
 export class BrandRepositoryImpl implements BrandRepository {
   tmpCarList = carList; //will be replaced by API call later
 
-  getAllBrand(): String[] {
-    var brandList: String[] = [];
-    for (let i = 0; i < carList.length; i++) {
-      if (brandList.indexOf(carList[i].brand) === -1)
-        brandList.push(carList[i].brand);
+  // getAllBrand(): String[] {
+  //   var brandList: String[] = [];
+  //   for (let i = 0; i < carList.length; i++) {
+  //     if (brandList.indexOf(carList[i].brand) === -1)
+  //       brandList.push(carList[i].brand);
+  //   }
+  //   return brandList;
+  // }
+
+  async getAllBrand(): Promise<String[]> {
+    try {
+      const response = await axios.get(`${backendURL}/brands`);
+      if (response.status === 200) {
+        const data = response.data as String[];
+        return data;
+      } else {
+        console.error("Request failed:", response.data.message);
+        return [];
+      }
+    } catch (error) {
+      console.error("An error occurred:", error);
+      return [];
     }
-    return brandList;
   }
 
   getAllCarFromBrand(brandname: String): Car[] {
