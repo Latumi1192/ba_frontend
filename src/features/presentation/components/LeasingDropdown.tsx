@@ -20,7 +20,7 @@ export default function BasicMenu() {
     const tmpArray = BrandServ.getAllBrand();
     tmpArray
       .then((data) => {
-        setBrandArray(data);
+        setBrandArray(data.data);
         console.log(data);
       })
       .catch((error) => {
@@ -140,7 +140,7 @@ export default function BasicMenu() {
             "aria-labelledby": "basic-button",
           }}
         >
-          {carArray.map((item) => (
+          {carArray.map((item, index) => (
             <MenuItem
               onClick={() => {
                 setCar(item.carname);
