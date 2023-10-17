@@ -142,6 +142,7 @@ export default function BasicMenu() {
         >
           {carArray.map((item, index) => (
             <MenuItem
+              key={index}
               onClick={() => {
                 setCar(item.carname);
                 setVisibility(true);
