@@ -12,7 +12,21 @@ import Rechnung from "./Rechnung";
 export default function BasicMenu() {
   const CarServ = new CarServiceImpl();
   const BrandServ = new BrandServiceImpl();
-  const brandArray = BrandServ.getAllBrand();
+  //const brandArray = BrandServ.getAllBrand();
+
+  const [brandArray, setBrandArray] = React.useState<String[]>([]);
+
+  React.useEffect(() => {
+    const tmpArray = BrandServ.getAllBrand();
+    tmpArray
+      .then((data) => {
+        setBrandArray(data);
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
 
   const [anchorEl1, setAnchorEl1] = React.useState<null | HTMLElement>(null);
   const [anchorEl2, setAnchorEl2] = React.useState<null | HTMLElement>(null);

@@ -4,7 +4,7 @@ import { BrandRepository } from "./BrandRepository";
 import { carList } from "../LocalDatabase";
 import axios from "axios";
 
-const backendURL = "http://localhost:3000";
+const backendURL = "http://localhost:3000/cars";
 
 export class BrandRepositoryImpl implements BrandRepository {
   tmpCarList = carList; //will be replaced by API call later
